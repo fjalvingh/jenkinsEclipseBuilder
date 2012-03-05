@@ -80,7 +80,7 @@ public class ProcessTools {
 			setName("StreamReader" + name);
 			try {
 				m_reader = new InputStreamReader(is, encoding);
-			} catch(UnsupportedEncodingException x) // Fuck James Gosling with his stupid checked exceptions crap
+			} catch(UnsupportedEncodingException x) // F*** James Gosling with his stupid checked exceptions crap
 			{
 				throw new IllegalStateException("Unsupported encoding " + encoding);
 			}
