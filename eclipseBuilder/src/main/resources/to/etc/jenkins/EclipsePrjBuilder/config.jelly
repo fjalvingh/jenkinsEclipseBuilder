@@ -19,4 +19,9 @@
 	<f:checkbox default="true" />
 </f:entry>
 
+<f:entry title="System properties" field="systemProperties">
+	<f:checkbox default="true" />
+</f:entry>
+
+
 </j:jelly>

@@ -11,6 +11,7 @@
 	<artifactId>eclipseBuilder</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>hpi</packaging>
+	<name>Eclipse Builder</name>
 
 	<scm>
 		<connection>scm:git:ssh://github.com/fjalvingh/jenkinsEclipseBuilder.git</connection>

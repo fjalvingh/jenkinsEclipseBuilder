@@ -335,7 +335,7 @@ public class JUnitTestRunner {
 			for(ATest at : m_jtl.getTestList()) {
 				double dur = at.getDuration() / 1000.0;
 
-				//-- Sign. Why on earth everone insists on storing stuff in presentation format instead of native format is a mystery to me 8-( Description contains the
+				//-- Sign. Why on earth everyone insists on storing stuff in presentation format instead of native format is a mystery to me 8-( Description contains the
 				//-- required data as "method(classname)" - so we need to get that out now.
 				Matcher m = CLASSP.matcher(at.getDescription().getDisplayName());
 				String cn, mn;

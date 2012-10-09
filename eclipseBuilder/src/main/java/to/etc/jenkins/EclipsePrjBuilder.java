@@ -51,13 +51,15 @@ public class EclipsePrjBuilder extends Builder {
 
 	private DescribableList<TestDataPublisher, Descriptor<TestDataPublisher>> testDataPublishers;
 
+	private String systemProperties;
 
 	// Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
 	@DataBoundConstructor
-	public EclipsePrjBuilder(String workspace, String project, boolean cleanBuild) {
+	public EclipsePrjBuilder(String workspace, String project, boolean cleanBuild, String systemProperties) {
 		this.workspace = workspace;
 		this.project = project;
 		this.cleanBuild = cleanBuild;
+		this.systemProperties = systemProperties;
 	}
 
 	/**
@@ -86,39 +88,6 @@ public class EclipsePrjBuilder extends Builder {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Helper class to load JDBC drivers from a given path.
-	 */
-	private static final class NoLoader extends URLClassLoader {
-		NoLoader(final URL[] u) {
-			super(u);
-		}
-
-		@Override
-		protected synchronized Class< ? > loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
-			// First, check if the class has already been loaded
-			Class< ? > c = findLoadedClass(name);
-			//            System.out.println(name+": findLoadedClass="+c);
-			if(c == null) {
-				//-- Try to load by THIS loader 1st,
-				try {
-					c = findClass(name);
-					//                    System.out.println(name+": findClass="+c);
-				} catch(ClassNotFoundException x) {
-					//                    System.out.println(name+": findClass exception");
-				}
-				if(c == null) {
-					c = super.loadClass(name, resolve); // Try parent
-					//                    System.out.println(name+": super.loadClass="+c);
-				}
-			}
-
-			if(resolve)
-				resolveClass(c);
-			return c;
-		}
 	}
 
 	/**
@@ -158,8 +127,6 @@ public class EclipsePrjBuilder extends Builder {
 			JavaCompiler.setCompiler(new EcjJarCompiler(compiler)); // Force builder to use the version from this jar, not Tomcat's thingy.
 		}
 
-		// This is where you 'build' the project.
-		// Since this is a dummy, we just say 'hello world' and call that a build.
 		try {
 			File root = new File(build.getModuleRoot().toString());
 			System.out.println("local = " + root);
